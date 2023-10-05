@@ -82,7 +82,7 @@ public class playerController : MonoBehaviour
 
     void ShrinkPlayer()
     {
-        float shrinkFactor = 0.8f; 
+        float shrinkFactor = 0.9f; 
 
         transform.localScale *= shrinkFactor;
     }
