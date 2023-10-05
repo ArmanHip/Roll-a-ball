@@ -7,7 +7,7 @@ using TMPro;
 public class playerController : MonoBehaviour
 {
     public float speed = 0;
-    public float maxSpeed;
+    public float maxspeed;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
 
@@ -52,32 +52,38 @@ public class playerController : MonoBehaviour
 
         Vector3 movement = (cameraForward * movementY) + (Camera.main.transform.right * movementX);
 
-        movement = Vector3.ClampMagnitude(movement, maxSpeed);
+        movement = Vector3.ClampMagnitude(movement, maxspeed);
 
         rb.AddForce(movement * speed);
 
-        if (rb.velocity.magnitude > maxSpeed)
+        if (rb.velocity.magnitude > maxspeed)
         {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+            rb.velocity = rb.velocity.normalized * maxspeed;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("PickUp"))
-        {
-            other.gameObject.SetActive(false);
-            count = count + 1;
+    if (other.gameObject.CompareTag("PickUp"))
+    {
+        other.gameObject.SetActive(false);
+        count = count + 1;
 
-            SetCountText();
-        }    
+        ShrinkPlayer();
 
-        if (other.gameObject.CompareTag("DoorKey"))
-        {
-            other.gameObject.SetActive(false);
-            
+        SetCountText();
+    }
 
-        }    
+    if (other.gameObject.CompareTag("DoorKey"))
+    {
+        other.gameObject.SetActive(false);
+    }
+    }
+
+    void ShrinkPlayer()
+    {
+        float shrinkFactor = 0.8f; 
+
+        transform.localScale *= shrinkFactor;
     }
 }
-
