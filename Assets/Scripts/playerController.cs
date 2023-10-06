@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class playerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
     public float maxspeed;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    public float shrinkfactor = 0.9f;
+    public float shrinkduration = 1.0f;
 
     private int count;
     private Rigidbody rb;
     private float movementX;
     private float movementY;
+    private Coroutine shrinkCoroutine;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,16 +30,16 @@ public class playerController : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
-       Vector2 movementVector = movementValue.Get<Vector2>();
+        Vector2 movementVector = movementValue.Get<Vector2>();
 
-       movementX = movementVector.x;
-       movementY = movementVector.y;
+        movementX = movementVector.x;
+        movementY = movementVector.y;
     }
 
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        if(count >= 12)
+        if (count >= 12)
         {
             winTextObject.SetActive(true);
         }
@@ -46,7 +48,7 @@ public class playerController : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 cameraForward = Camera.main.transform.forward;
-        cameraForward.y = 0.0f;  
+        cameraForward.y = 0.0f;
 
         cameraForward.Normalize();
 
@@ -64,26 +66,38 @@ public class playerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-    if (other.gameObject.CompareTag("PickUp"))
-    {
-        other.gameObject.SetActive(false);
-        count = count + 1;
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            other.gameObject.SetActive(false);
+            count = count + 1;
 
-        ShrinkPlayer();
+            if (shrinkCoroutine != null)
+                StopCoroutine(shrinkCoroutine);
 
-        SetCountText();
+            shrinkCoroutine = StartCoroutine(ShrinkPlayerCoroutine());
+
+            SetCountText();
+        }
+
+        if (other.gameObject.CompareTag("DoorKey"))
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 
-    if (other.gameObject.CompareTag("DoorKey"))
+    private IEnumerator ShrinkPlayerCoroutine()
     {
-        other.gameObject.SetActive(false);
-    }
-    }
+        Vector3 initialScale = transform.localScale;
+        Vector3 targetScale = initialScale * shrinkfactor;
+        float elapsedTime = 0f;
 
-    void ShrinkPlayer()
-    {
-        float shrinkFactor = 0.9f; 
+        while (elapsedTime < shrinkduration)
+        {
+            transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / shrinkduration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
 
-        transform.localScale *= shrinkFactor;
+        transform.localScale = targetScale;
     }
 }
