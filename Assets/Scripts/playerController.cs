@@ -84,7 +84,9 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Grow"))
         {
             other.gameObject.SetActive(false);
+            count = count + 1;
             StartCoroutine(GrowPlayerCoroutine());
+            SetCountText();
         }
 
         if (other.gameObject.CompareTag("DoorKey"))
