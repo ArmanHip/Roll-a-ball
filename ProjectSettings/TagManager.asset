@@ -8,6 +8,7 @@ TagManager:
   - Door
   - DoorKey
   - Ground
+  - Grow
   layers:
   - Default
   - TransparentFX

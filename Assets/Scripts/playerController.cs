@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     public float maxspeed;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
-    public float shrinkfactor = 0.9f;
-    public float shrinkduration = 1.0f;
+    public float shrinkFactor = 0.9f;
+    public float shrinkDuration = 1.0f;
+    public float growFactor = 5.0f; 
+    public float growDuration = 1.0f; 
 
     private int count;
     private Rigidbody rb;
@@ -79,6 +81,12 @@ public class PlayerController : MonoBehaviour
             SetCountText();
         }
 
+        if (other.gameObject.CompareTag("Grow"))
+        {
+            other.gameObject.SetActive(false);
+            StartCoroutine(GrowPlayerCoroutine());
+        }
+
         if (other.gameObject.CompareTag("DoorKey"))
         {
             other.gameObject.SetActive(false);
@@ -88,16 +96,33 @@ public class PlayerController : MonoBehaviour
     private IEnumerator ShrinkPlayerCoroutine()
     {
         Vector3 initialScale = transform.localScale;
-        Vector3 targetScale = initialScale * shrinkfactor;
+        Vector3 targetScale = initialScale * shrinkFactor;
         float elapsedTime = 0f;
 
-        while (elapsedTime < shrinkduration)
+        while (elapsedTime < shrinkDuration)
         {
-            transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / shrinkduration);
+            transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / shrinkDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         transform.localScale = targetScale;
+    }
+
+    private IEnumerator GrowPlayerCoroutine()
+    {
+        float initialScale = transform.localScale.magnitude;
+        float targetScale = initialScale * growFactor;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < growDuration)
+        {
+            float currentScale = Mathf.Lerp(initialScale, targetScale, elapsedTime / growDuration);
+            transform.localScale = Vector3.one * currentScale;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = Vector3.one * targetScale;
     }
 }
