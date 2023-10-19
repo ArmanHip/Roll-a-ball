@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
 
     void SetCountText()
     {
-        countText.text = "Count: " + count.ToString();
-        if (count >= 2)
+        countText.text = "Keys: " + count.ToString() + "/" + "3";
+        if (count >= 3)
         {
             winTextObject.SetActive(true);
         }
@@ -93,9 +93,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("DoorKey"))
+        if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
+            count = count + 1;
+            SetCountText();
         }
     }
 }
