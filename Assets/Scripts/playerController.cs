@@ -50,7 +50,9 @@ public class PlayerController : MonoBehaviour
 
     void Update() // for jumping only
     {
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (!isGrounded) return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false; 
@@ -59,23 +61,30 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        isGrounded = false;
+
+        // Check if on the ground
+        if (Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hit, 0.5f))
+        {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                isGrounded = true;
+            }
+        }
+
         Vector3 cameraForward = Camera.main.transform.forward;
         cameraForward.y = 0.0f;
         cameraForward.Normalize();
         Vector3 movement = (cameraForward * movementY) + (Camera.main.transform.right * movementX);
         movement = Vector3.ClampMagnitude(movement, maxspeed);
         rb.AddForce(movement * speed);
+
         if (rb.velocity.magnitude > maxspeed)
         {
             rb.velocity = rb.velocity.normalized * maxspeed;
         }
-
-        // Check if the player is on ground
-        if (Physics.Raycast(transform.position, -Vector3.up, 0.5f))
-        {
-            isGrounded = true;
-        }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
