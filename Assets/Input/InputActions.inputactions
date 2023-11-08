@@ -771,6 +771,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Jump",
+            "id": "e21874b4-b256-4f28-ae5e-3e6335900f54",
+            "actions": [
+                {
+                    "name": "Player Jump",
+                    "type": "Button",
+                    "id": "eab9691c-2478-4724-91b1-a5921c994015",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c81dbd85-b963-4eef-9301-0763266e62ae",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

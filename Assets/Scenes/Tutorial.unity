@@ -2448,13 +2448,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12
-  maxspeed: 7
+  maxspeed: 8
+  jumpForce: 6
   countText: {fileID: 0}
   winTextObject: {fileID: 0}
-  shrinkFactor: 0.9
-  shrinkDuration: 1
-  growFactor: 5
-  growDuration: 1
 --- !u!114 &1139502952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2495,7 +2492,7 @@ Rigidbody:
   m_GameObject: {fileID: 1139502950}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1.5
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}

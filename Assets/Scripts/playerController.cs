@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
     public float maxspeed;
+    public float jumpForce = 5.0f; 
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
 
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float movementX;
     private float movementY;
+    private bool isGrounded; 
 
     void Start()
     {
@@ -46,22 +48,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Update() // for jumping only
+    {
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGrounded = false; 
+        }
+    }
+
     void FixedUpdate()
     {
         Vector3 cameraForward = Camera.main.transform.forward;
         cameraForward.y = 0.0f;
-
         cameraForward.Normalize();
-
         Vector3 movement = (cameraForward * movementY) + (Camera.main.transform.right * movementX);
-
         movement = Vector3.ClampMagnitude(movement, maxspeed);
-
         rb.AddForce(movement * speed);
-
         if (rb.velocity.magnitude > maxspeed)
         {
             rb.velocity = rb.velocity.normalized * maxspeed;
+        }
+
+        // Check if the player is on ground
+        if (Physics.Raycast(transform.position, -Vector3.up, 0.5f))
+        {
+            isGrounded = true;
         }
     }
 
