@@ -13,11 +13,20 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
 
+    // Dash variables
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 9f;
+
     private int count;
     private Rigidbody rb;
     private float movementX;
     private float movementY;
     private bool isGrounded; 
+
+    private bool isDashing;
+    private float dashTimer;
+    private float dashCooldownTimer;
 
     void Start()
     {
@@ -26,6 +35,10 @@ public class PlayerController : MonoBehaviour
 
         SetCountText();
         winTextObject.SetActive(false);
+
+        isDashing = false;
+        dashTimer = 0;
+        dashCooldownTimer = 0;
     }
 
     void OnMove(InputValue movementValue)
@@ -57,10 +70,55 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false; 
         }
+
+        // Dash 
+        if (Input.GetKeyDown(KeyCode.R) && dashCooldownTimer <= 0 && !isDashing)
+        {
+            StartCoroutine(Dash());
+        }
+
+        // Cooldown timer
+        if (dashCooldownTimer > 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        float startTime = Time.time; 
+        isDashing = true;
+
+        Vector3 dashDirection = Camera.main.transform.forward;
+        dashDirection.y = 0;
+        dashDirection.Normalize();
+
+        rb.velocity = dashDirection * dashSpeed;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        isDashing = false;
+        dashCooldownTimer = dashCooldown; 
     }
 
     void FixedUpdate()
     {
+        if (!isDashing)
+        {
+            Vector3 cameraForward = Camera.main.transform.forward;
+            cameraForward.y = 0.0f;
+            cameraForward.Normalize();
+            Vector3 movement = (cameraForward * movementY) + (Camera.main.transform.right * movementX);
+            movement = Vector3.ClampMagnitude(movement, 1); 
+
+            rb.AddForce(movement * speed);
+
+            if (rb.velocity.magnitude > maxspeed)
+            {
+                rb.velocity = rb.velocity.normalized * maxspeed;
+            }
+        }
+
         isGrounded = false;
 
         // Check if on the ground
@@ -71,20 +129,7 @@ public class PlayerController : MonoBehaviour
                 isGrounded = true;
             }
         }
-
-        Vector3 cameraForward = Camera.main.transform.forward;
-        cameraForward.y = 0.0f;
-        cameraForward.Normalize();
-        Vector3 movement = (cameraForward * movementY) + (Camera.main.transform.right * movementX);
-        movement = Vector3.ClampMagnitude(movement, maxspeed);
-        rb.AddForce(movement * speed);
-
-        if (rb.velocity.magnitude > maxspeed)
-        {
-            rb.velocity = rb.velocity.normalized * maxspeed;
-        }
     }
-
 
     private void OnTriggerEnter(Collider other)
     {

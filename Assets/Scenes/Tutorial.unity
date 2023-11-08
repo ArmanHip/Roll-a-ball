@@ -2452,6 +2452,9 @@ MonoBehaviour:
   jumpForce: 6
   countText: {fileID: 0}
   winTextObject: {fileID: 0}
+  dashSpeed: 40
+  dashDuration: 0.15
+  dashCooldown: 9
 --- !u!114 &1139502952
 MonoBehaviour:
   m_ObjectHideFlags: 0
