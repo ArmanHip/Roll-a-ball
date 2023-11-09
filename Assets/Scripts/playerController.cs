@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
 
-    // Dash variables
+    public TextMeshProUGUI dashCooldownText; 
+    public GameObject dashCooldownBox; 
     public float dashSpeed = 20f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 9f;
@@ -81,6 +82,12 @@ public class PlayerController : MonoBehaviour
         if (dashCooldownTimer > 0)
         {
             dashCooldownTimer -= Time.deltaTime;
+            dashCooldownBox.SetActive(true); // Show the cooldown box
+            dashCooldownText.text = dashCooldownTimer.ToString("F1") + "s"; 
+        }
+        else
+        {
+            dashCooldownBox.SetActive(false); 
         }
     }
 
