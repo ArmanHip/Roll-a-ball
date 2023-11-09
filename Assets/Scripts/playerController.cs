@@ -10,17 +10,16 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public float maxspeed;
     public float jumpForce = 5.0f; 
-    public TextMeshProUGUI countText;
-    public GameObject winTextObject;
-
-    public TextMeshProUGUI dashCooldownText; 
-    public GameObject dashCooldownBox; 
     public float dashSpeed = 20f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 9f;
+    public TextMeshProUGUI countText;
+    public GameObject winTextObject;
+    public TextMeshProUGUI dashCooldownText; 
+    public GameObject dashCooldownBox; 
 
-    private int count;
     private Rigidbody rb;
+    private int count;
     private float movementX;
     private float movementY;
     private bool isGrounded; 
