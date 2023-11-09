@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         dashTimer = 0;
         dashCooldownTimer = 0;
+
+        dashCooldownBox.SetActive(true);
+        dashCooldownText.gameObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
@@ -62,14 +65,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update() // for jumping only
+    void Update()
     {
+        if (dashCooldownTimer > 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
+            dashCooldownText.gameObject.SetActive(true); 
+            dashCooldownText.text = dashCooldownTimer.ToString("F1") + "s";
+        }
+        else
+        {
+            dashCooldownText.gameObject.SetActive(false); 
+        }
+
         if (!isGrounded) return;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false; 
+            isGrounded = false;
         }
 
         // Dash 
@@ -77,19 +91,8 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-
-        // Cooldown timer
-        if (dashCooldownTimer > 0)
-        {
-            dashCooldownTimer -= Time.deltaTime;
-            dashCooldownBox.SetActive(true); // Show the cooldown box
-            dashCooldownText.text = dashCooldownTimer.ToString("F1") + "s"; 
-        }
-        else
-        {
-            dashCooldownBox.SetActive(false); 
-        }
     }
+
 
     private IEnumerator Dash()
     {
