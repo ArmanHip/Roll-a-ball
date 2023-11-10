@@ -13,13 +13,13 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed = 20f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 9f;
-    public TextMeshProUGUI countText;
-    public GameObject winTextObject;
+    //public TextMeshProUGUI countText;
+    //public GameObject winTextObject;
     public TextMeshProUGUI dashCooldownText; 
     public GameObject dashCooldownBox; 
 
     private Rigidbody rb;
-    private int count;
+    //private int count;
     private float movementX;
     private float movementY;
     private bool isGrounded; 
@@ -31,10 +31,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        count = 0;
+        //count = 0;
 
-        SetCountText();
-        winTextObject.SetActive(false);
+        //SetCountText();
+        //winTextObject.SetActive(false);
 
         isDashing = false;
         dashTimer = 0;
@@ -52,17 +52,17 @@ public class PlayerController : MonoBehaviour
         movementY = movementVector.y;
     }
 
-    void SetCountText()
-    {
-        int totalCount = SceneManager.GetActiveScene().name == "Trial 2" ? 12 : 4; // Get total amount for the current level
+    //void SetCountText()
+    //{
+        //int totalCount = SceneManager.GetActiveScene().name == "Trial 2" ? 12 : 4; // Get total amount for the current level
 
-        countText.text = "Count: " + count.ToString() + " / " + totalCount.ToString();
-        if (count >= totalCount)
-        {
-            winTextObject.SetActive(true);
-            StartCoroutine(LoadNextLevel());
-        }
-    }
+        //countText.text = "Count: " + count.ToString() + " / " + totalCount.ToString();
+        //if (count >= totalCount)
+        //{
+            //winTextObject.SetActive(true);
+            //StartCoroutine(LoadNextLevel());
+        //}
+    //}
 
     void Update()
     {
@@ -140,20 +140,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("PickUp") || other.gameObject.CompareTag("Grow"))
-        {
-            other.gameObject.SetActive(false);
-            count = count + 1;
-            SetCountText();
-        }
+    //private void OnTriggerEnter(Collider other)
+    //{
+        //if (other.gameObject.CompareTag("PickUp") || other.gameObject.CompareTag("Grow"))
+        //{
+            //other.gameObject.SetActive(false);
+            //count = count + 1;
+            //SetCountText();
+        //}
 
-        if (other.gameObject.CompareTag("DoorKey"))
-        {
-            other.gameObject.SetActive(false);
-        }
-    }
+        //if (other.gameObject.CompareTag("DoorKey"))
+        //{
+            //other.gameObject.SetActive(false);
+        //}
+    //}
 
     private IEnumerator LoadNextLevel()
     {
