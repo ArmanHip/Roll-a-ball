@@ -9,12 +9,16 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public Image healthBar;
     public float damageInterval = 1f; 
+    public GameObject playerDeathPanel; 
     private Dictionary<string, Coroutine> damageCoroutines = new Dictionary<string, Coroutine>();
 
     void Start()
     {
         currentHealth = maxHealth;
         UpdateHealthBar();
+
+        playerDeathPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -52,10 +56,30 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthBar();
+
+        if (currentHealth <= 0)
+        {
+            HandleDeath();
+        }
     }
 
     void UpdateHealthBar()
     {
         healthBar.fillAmount = (float)currentHealth / maxHealth;
+    }
+
+    void HandleDeath()
+    {
+        foreach (var coroutine in damageCoroutines.Values)
+        {
+            StopCoroutine(coroutine);
+        }
+        damageCoroutines.Clear();
+
+        playerDeathPanel.SetActive(true); 
+        Time.timeScale = 0; 
+        return; 
+
+        //Debug.Log("Player has died."); 
     }
 }
