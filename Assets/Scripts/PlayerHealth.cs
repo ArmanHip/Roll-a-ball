@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public Image healthBar;
+    public float damageInterval = 1f; 
+    private bool isTakingDamage = false;
 
     void Start()
     {
@@ -15,11 +17,30 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthBar();
     }
 
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (collision.gameObject.CompareTag("Enemy") && !isTakingDamage)
         {
-            TakeDamage(10); 
+            StartCoroutine(TakeDamageOverTime());
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            StopCoroutine(TakeDamageOverTime());
+            isTakingDamage = false;
+        }
+    }
+
+    private IEnumerator TakeDamageOverTime()
+    {
+        isTakingDamage = true;
+        while (isTakingDamage)
+        {
+            TakeDamage(2); 
+            yield return new WaitForSeconds(damageInterval); 
         }
     }
 
@@ -35,4 +56,3 @@ public class PlayerHealth : MonoBehaviour
         healthBar.fillAmount = (float)currentHealth / maxHealth;
     }
 }
-
