@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public Image healthBar;
     public float damageInterval = 1f; 
-    private bool isTakingDamage = false;
+    private Dictionary<string, Coroutine> damageCoroutines = new Dictionary<string, Coroutine>();
 
     void Start()
     {
@@ -19,27 +19,30 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && !isTakingDamage)
+        string tag = collision.gameObject.tag;
+        if ((tag == "Enemy" || tag == "EnemyFast") && !damageCoroutines.ContainsKey(tag))
         {
-            StartCoroutine(TakeDamageOverTime());
+            int damage = tag == "Enemy" ? 2 : 1;
+            Coroutine damageCoroutine = StartCoroutine(TakeDamageOverTime(damage));
+            damageCoroutines[tag] = damageCoroutine;
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        string tag = collision.gameObject.tag;
+        if (damageCoroutines.ContainsKey(tag))
         {
-            StopCoroutine(TakeDamageOverTime());
-            isTakingDamage = false;
+            StopCoroutine(damageCoroutines[tag]);
+            damageCoroutines.Remove(tag);
         }
     }
 
-    private IEnumerator TakeDamageOverTime()
+    private IEnumerator TakeDamageOverTime(int damage)
     {
-        isTakingDamage = true;
-        while (isTakingDamage)
+        while (true)
         {
-            TakeDamage(2); 
+            TakeDamage(damage); 
             yield return new WaitForSeconds(damageInterval); 
         }
     }
