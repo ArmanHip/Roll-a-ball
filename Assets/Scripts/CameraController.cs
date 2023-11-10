@@ -5,36 +5,46 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
-    public float rotationspeed = 5.0f;
-    public float mindistance = 3.0f;
+    public float rotationSpeed = 5.0f;
+    public float minDistance = 3.0f;
     public float maxPlayerScale = 2.0f;
+    public float cameraLagSpeed = 5.0f; 
+    public Camera cam; 
 
     private Vector3 offset;
+    private float baseFOV; 
 
     void Start()
     {
         CalculateOffset();
+        baseFOV = cam.fieldOfView; 
     }
 
     void LateUpdate()
     {
-        float mouseX = Input.GetAxis("Mouse X") * rotationspeed;
+        float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
         Quaternion camTurnAngle = Quaternion.Euler(0, mouseX, 0);
         offset = camTurnAngle * offset;
 
         float playerScale = Mathf.Clamp(player.transform.localScale.magnitude, 1.0f, maxPlayerScale);
-        float maxdistance = playerScale * 5.0f;
+        float maxDistance = playerScale * 5.0f;
 
         Vector3 desiredPosition = player.transform.position + offset;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, cameraLagSpeed * Time.deltaTime); 
 
-        float distance = Vector3.Distance(desiredPosition, transform.position);
+        float distance = Vector3.Distance(smoothedPosition, transform.position);
 
-        if (distance > maxdistance)
-            desiredPosition = player.transform.position + offset.normalized * maxdistance;
-        else if (distance < mindistance)
-            desiredPosition = player.transform.position + offset.normalized * mindistance;
+        if (distance > maxDistance)
+            smoothedPosition = player.transform.position + offset.normalized * maxDistance;
+        else if (distance < minDistance)
+            smoothedPosition = player.transform.position + offset.normalized * minDistance;
 
-        transform.position = desiredPosition;
+        transform.position = smoothedPosition;
+
+        Rigidbody playerRb = player.GetComponent<Rigidbody>();
+        float speed = playerRb.velocity.magnitude;
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, baseFOV + speed, Time.deltaTime);
+
         transform.LookAt(player.transform.position);
     }
 

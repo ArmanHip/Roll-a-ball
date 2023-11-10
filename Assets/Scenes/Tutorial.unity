@@ -260,9 +260,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1139502950}
-  rotationspeed: 5
-  mindistance: 3
-  maxPlayerScale: 5
+  rotationSpeed: 5
+  minDistance: 4
+  maxPlayerScale: 2
+  cameraLagSpeed: 0.25
+  cam: {fileID: 25236525}
 --- !u!114 &25236523
 MonoBehaviour:
   m_ObjectHideFlags: 0
