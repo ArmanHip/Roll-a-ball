@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour
     public float damage = 10f;
     public float range = 100f;
     public Camera fpsCam;
-    public ParticleSystem muzzleFlash;
+    public GameObject muzzleFlash;
 
     void Update()
     {
@@ -19,7 +19,8 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
-        muzzleFlash.Play();
+       muzzleFlash.SetActive(true);
+       Invoke(nameof(DisableMuzzleFlash), 0.1f);
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
@@ -32,5 +33,10 @@ public class Weapon : MonoBehaviour
                 target.TakeDamage(damage);
             }
         }
+    }
+
+    void DisableMuzzleFlash()
+    {
+        muzzleFlash.SetActive(false); 
     }
 }
