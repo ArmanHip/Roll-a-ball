@@ -14,6 +14,8 @@ public class CountdownTimer : MonoBehaviour
 
     void Start()
     {
+        winPanel.SetActive(false);
+
         if (SceneManager.GetActiveScene().name == "Level_2")
         {
             countdown = 240.0f; // 4 mins
@@ -23,33 +25,30 @@ public class CountdownTimer : MonoBehaviour
             countdown = 300.0f; // 5 mins
         }
 
-        winPanel.SetActive(false);
         Time.timeScale = 1;
         UpdateTimerText();
     }
 
     void Update()
     {
-        countdown -= Time.deltaTime;
-
-        if (countdown < 0)
+        if (!WinPanelActive) 
         {
-            countdown = 0;
-            WinPanelActive = true; 
-            winPanel.SetActive(true);
-            Time.timeScale = 0;
-            return;
-        }
-        else
-        {
-            WinPanelActive = false; 
-        }
+            countdown -= Time.deltaTime;
 
-        UpdateTimerText();
+            if (countdown <= 0)
+            {
+                countdown = 0;
+                WinPanelActive = true;
+                winPanel.SetActive(true);
+                Time.timeScale = 0;
+            }
 
-        if (countdown <= 10) // Change color of text to red
-        {
-            timerText.color = Color.red;
+            UpdateTimerText();
+
+            if (countdown <= 10) // Change color of text to red
+            {
+                timerText.color = Color.red;
+            }
         }
     }
 

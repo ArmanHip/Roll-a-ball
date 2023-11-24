@@ -9927,10 +9927,10 @@ MonoBehaviour:
     spawnInterval: 4.5
     maxEnemies: 15
   - waveName: Wave 3
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
     spawnInterval: 3
-    maxEnemies: 20
+    maxEnemies: 4
   - waveName: Wave 4
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
@@ -9942,7 +9942,7 @@ MonoBehaviour:
     spawnInterval: 2
     maxEnemies: 30
   startDelay: 5
-  cooldownDuration: 15
+  cooldownDuration: 10
 --- !u!4 &415618671
 Transform:
   m_ObjectHideFlags: 0
@@ -10000,10 +10000,10 @@ MonoBehaviour:
     spawnInterval: 4.5
     maxEnemies: 15
   - waveName: Wave 3
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
     spawnInterval: 3
-    maxEnemies: 20
+    maxEnemies: 4
   - waveName: Wave 4
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
@@ -10015,7 +10015,7 @@ MonoBehaviour:
     spawnInterval: 2
     maxEnemies: 30
   startDelay: 5
-  cooldownDuration: 15
+  cooldownDuration: 10
 --- !u!4 &424913057
 Transform:
   m_ObjectHideFlags: 0
@@ -44329,10 +44329,10 @@ MonoBehaviour:
     spawnInterval: 4.5
     maxEnemies: 15
   - waveName: Wave 3
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
     spawnInterval: 3
-    maxEnemies: 20
+    maxEnemies: 4
   - waveName: Wave 4
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
@@ -44344,7 +44344,7 @@ MonoBehaviour:
     spawnInterval: 2
     maxEnemies: 30
   startDelay: 5
-  cooldownDuration: 15
+  cooldownDuration: 10
 --- !u!4 &1898154077
 Transform:
   m_ObjectHideFlags: 0
@@ -46726,10 +46726,10 @@ MonoBehaviour:
     spawnInterval: 4.5
     maxEnemies: 15
   - waveName: Wave 3
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
     spawnInterval: 3
-    maxEnemies: 20
+    maxEnemies: 4
   - waveName: Wave 4
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
@@ -46741,7 +46741,7 @@ MonoBehaviour:
     spawnInterval: 2
     maxEnemies: 30
   startDelay: 5
-  cooldownDuration: 15
+  cooldownDuration: 10
 --- !u!4 &2112611114
 Transform:
   m_ObjectHideFlags: 0
