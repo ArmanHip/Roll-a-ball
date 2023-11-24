@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class CountdownTimer : MonoBehaviour
 {
     public TextMeshProUGUI timerText; 
-    public GameObject gameOverPanel; 
+    public GameObject winPanel; 
     private float countdown; 
 
     void Start()
@@ -15,14 +15,14 @@ public class CountdownTimer : MonoBehaviour
         // Time limit for each level
         if (SceneManager.GetActiveScene().name == "Trial 2")
         {
-            countdown = 240.0f; // 4 min
+            countdown = 240.0f; // 4 mins
         }
         else
         {
-            countdown = 120.0f; // 2 min
+            countdown = 300.0f; // 5 mins
         }
 
-        gameOverPanel.SetActive(false);
+        winPanel.SetActive(false);
         Time.timeScale = 1;
         UpdateTimerText();
     }
@@ -34,7 +34,7 @@ public class CountdownTimer : MonoBehaviour
         if (countdown < 0)
         {
             countdown = 0;
-            gameOverPanel.SetActive(true); 
+            winPanel.SetActive(true); 
             Time.timeScale = 0; 
             return; 
         }

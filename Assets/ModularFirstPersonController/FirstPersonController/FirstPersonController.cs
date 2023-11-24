@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 #if UNITY_EDITOR
     using UnityEditor;
@@ -11,6 +12,24 @@ using UnityEngine.UI;
 public class FirstPersonController : MonoBehaviour
 {
     private Rigidbody rb;
+
+    // Dash stuff
+    #region Dash
+
+    public bool enableDash = true;
+    public KeyCode dashKey = KeyCode.R;
+    public float dashSpeed = 50f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 7f;
+
+    public TextMeshProUGUI dashCooldownText; 
+
+    #endregion
+
+    // Internal Variables
+    private bool isDashing = false;
+    private float dashTimer = 0f;
+    private float dashCooldownTimer = 0f;
 
     #region Camera Movement Variables
 
@@ -360,6 +379,41 @@ public class FirstPersonController : MonoBehaviour
         {
             HeadBob();
         }
+
+        #region Dash Input Handling
+        if (enableDash)
+        {
+            if (Input.GetKeyDown(dashKey) && !isDashing && dashCooldownTimer <= 0f)
+            {
+                isDashing = true;
+                dashTimer = dashDuration;
+            }
+
+            if (isDashing)
+            {
+                if (dashCooldownText.gameObject.activeSelf)
+                {
+                    dashCooldownText.gameObject.SetActive(false);
+                }
+            }
+            else if (dashCooldownTimer > 0f)
+            {
+                dashCooldownText.text = dashCooldownTimer.ToString("F2");
+                if (!dashCooldownText.gameObject.activeSelf)
+                {
+                    dashCooldownText.gameObject.SetActive(true);
+                }
+                dashCooldownTimer -= Time.deltaTime;
+            }
+            else
+            {
+                if (dashCooldownText.gameObject.activeSelf)
+                {
+                    dashCooldownText.gameObject.SetActive(false);
+                }
+            }
+        }
+        #endregion
     }
 
     void FixedUpdate()
@@ -441,6 +495,20 @@ public class FirstPersonController : MonoBehaviour
             }
         }
 
+        #endregion
+
+        #region Dash Movement
+        if (isDashing)
+        {
+            rb.velocity = transform.forward * dashSpeed; 
+            dashTimer -= Time.fixedDeltaTime;
+
+            if (dashTimer <= 0f)
+            {
+                isDashing = false;
+                dashCooldownTimer = dashCooldown; 
+            }
+        }
         #endregion
     }
 
@@ -675,6 +743,37 @@ public class FirstPersonController : MonoBehaviour
         EditorGUILayout.Space();
 
         #endregion
+
+        #region Dash Setup
+
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        GUILayout.Label("Dash Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 }, GUILayout.ExpandWidth(true));
+        EditorGUILayout.Space();
+
+        fpc.enableDash = EditorGUILayout.ToggleLeft(new GUIContent("Enable Dash", "Allowed to dash."), fpc.enableDash);
+
+        GUI.enabled = fpc.enableDash;
+        fpc.dashKey = (KeyCode)EditorGUILayout.EnumPopup(new GUIContent("Dash Key", "What key is used to dash."), fpc.dashKey);
+        fpc.dashSpeed = EditorGUILayout.FloatField(new GUIContent("Dash Speed", "The speed of the dash."), fpc.dashSpeed);
+        fpc.dashDuration = EditorGUILayout.FloatField(new GUIContent("Dash Duration", "How long the dash will last."), fpc.dashDuration);
+        fpc.dashCooldown = EditorGUILayout.FloatField(new GUIContent("Dash Cooldown", "How long the player must wait before they can dash again."), fpc.dashCooldown);
+
+        // Add the TextMeshProUGUI field here
+        EditorGUILayout.Space();
+        GUILayout.Label("Dash UI", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 });
+        fpc.dashCooldownText = (TextMeshProUGUI)EditorGUILayout.ObjectField(
+            new GUIContent("Dash Cooldown Text", "TextMeshProUGUI object to display the dash cooldown."),
+            fpc.dashCooldownText,
+            typeof(TextMeshProUGUI),
+            true
+        );
+
+        GUI.enabled = true;
+
+        EditorGUILayout.Space();
+
+        #endregion
+
 
         #region Jump
 
