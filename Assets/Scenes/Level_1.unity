@@ -23376,9 +23376,10 @@ MonoBehaviour:
   range: 10000
   fpsCam: {fileID: 217302381}
   muzzleFlash: {fileID: 1337844598}
-  gunBarrell: {fileID: 1285554352}
+  gunBarrel: {fileID: 1285554352}
   bulletTrail: {fileID: 6670010285891972953, guid: 6d0a597581bc77a4a9af0f4ff4e134ab,
     type: 3}
+  fireRate: 0.2
 --- !u!1 &1041502670
 GameObject:
   m_ObjectHideFlags: 0
