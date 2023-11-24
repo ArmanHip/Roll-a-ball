@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.39215687, g: 0.29411766, b: 0.29411766, a: 1}
+  m_AmbientSkyColor: {r: 0.5882353, g: 0.39215687, b: 0.39215687, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -9937,10 +9937,10 @@ MonoBehaviour:
     spawnInterval: 2
     maxEnemies: 25
   - waveName: Wave 5
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
     spawnInterval: 2
-    maxEnemies: 30
+    maxEnemies: 6
   startDelay: 5
   cooldownDuration: 10
 --- !u!4 &415618671
@@ -10010,10 +10010,10 @@ MonoBehaviour:
     spawnInterval: 2
     maxEnemies: 25
   - waveName: Wave 5
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
     spawnInterval: 2
-    maxEnemies: 30
+    maxEnemies: 6
   startDelay: 5
   cooldownDuration: 10
 --- !u!4 &424913057
@@ -44339,10 +44339,10 @@ MonoBehaviour:
     spawnInterval: 2
     maxEnemies: 25
   - waveName: Wave 5
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
     spawnInterval: 2
-    maxEnemies: 30
+    maxEnemies: 6
   startDelay: 5
   cooldownDuration: 10
 --- !u!4 &1898154077
@@ -46736,10 +46736,10 @@ MonoBehaviour:
     spawnInterval: 2
     maxEnemies: 25
   - waveName: Wave 5
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
     spawnInterval: 2
-    maxEnemies: 30
+    maxEnemies: 6
   startDelay: 5
   cooldownDuration: 10
 --- !u!4 &2112611114
