@@ -9,6 +9,9 @@ public class Weapon : MonoBehaviour
     public Camera fpsCam;
     public GameObject muzzleFlash;
 
+    public Transform gunBarrell;
+    public TrailRenderer bulletTrail;
+
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -19,6 +22,12 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
+        var bullet = Instantiate(bulletTrail, gunBarrell.position, Quaternion.identity);
+        bullet.AddPosition(gunBarrell.position);
+        {
+            bullet.transform.position = transform.position + (fpsCam.transform.forward * 200);
+        }
+
        muzzleFlash.SetActive(true);
        Invoke(nameof(DisableMuzzleFlash), 0.1f);
 
