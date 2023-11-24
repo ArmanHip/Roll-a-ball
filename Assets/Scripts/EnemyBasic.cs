@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class EnemyBasic : MonoBehaviour
 {
-    public Transform player;
     public float moveSpeed = 5f;
     public float rotationSpeed = 5f;
     public float smoothTime = 1F;
 
+    private Transform player;
     private Rigidbody rb;
     private Vector3 velocity = Vector3.zero;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player").transform; 
     }
 
     private void FixedUpdate()
     {
         Vector3 direction = player.position - transform.position;
-        direction.y = 0; 
+        direction.y = 0;
 
-        if (direction.magnitude > 0.1f) 
+        if (direction.magnitude > 0.1f)
         {
             direction.Normalize();
 
