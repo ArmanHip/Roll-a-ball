@@ -10,10 +10,11 @@ public class CountdownTimer : MonoBehaviour
     public GameObject winPanel; 
     private float countdown; 
 
+    public static bool WinPanelActive = false;
+
     void Start()
     {
-        // Time limit for each level
-        if (SceneManager.GetActiveScene().name == "Trial 2")
+        if (SceneManager.GetActiveScene().name == "Level_2")
         {
             countdown = 240.0f; // 4 mins
         }
@@ -34,15 +35,19 @@ public class CountdownTimer : MonoBehaviour
         if (countdown < 0)
         {
             countdown = 0;
-            winPanel.SetActive(true); 
-            Time.timeScale = 0; 
-            return; 
+            WinPanelActive = true; 
+            winPanel.SetActive(true);
+            Time.timeScale = 0;
+            return;
+        }
+        else
+        {
+            WinPanelActive = false; 
         }
 
         UpdateTimerText();
 
-        // If 10 seconds or less, change the color to red
-        if (countdown <= 10)
+        if (countdown <= 10) // Change color of text to red
         {
             timerText.color = Color.red;
         }
@@ -60,12 +65,14 @@ public class CountdownTimer : MonoBehaviour
 
     public void RestartLevel()
     {
+        WinPanelActive = false;
         Time.timeScale = 1; 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GoToMainMenu()
     {
+        WinPanelActive = false;
         Time.timeScale = 1; 
         SceneManager.LoadScene("MainMenu"); 
     }
