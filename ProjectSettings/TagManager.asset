@@ -20,8 +20,8 @@ TagManager:
   - UI
   - obstacleMask
   - Ground
-  - 
-  - 
+  - Wall
+  - Enemy
   - 
   - 
   - 
