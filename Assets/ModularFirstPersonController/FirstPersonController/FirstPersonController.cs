@@ -219,9 +219,11 @@ public class FirstPersonController : MonoBehaviour
     private void Update()
     {
         #region Camera
+        
+        if (PlayerHealth.IsPlayerDead) return; 
 
         // Control camera movement
-        if(cameraCanMove)
+        if(cameraCanMove && !PauseMenu.Paused)
         {
             yaw = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
 
@@ -419,7 +421,10 @@ public class FirstPersonController : MonoBehaviour
     void FixedUpdate()
     {
         #region Movement
-        if (playerCanMove)
+        
+        if (PlayerHealth.IsPlayerDead) return;
+        
+        if (playerCanMove && !PauseMenu.Paused)
         {
             // Calculate how fast we should be moving
             Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));

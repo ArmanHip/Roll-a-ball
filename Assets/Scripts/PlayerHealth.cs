@@ -12,8 +12,11 @@ public class PlayerHealth : MonoBehaviour
     public GameObject playerDeathPanel; 
     private Dictionary<string, Coroutine> damageCoroutines = new Dictionary<string, Coroutine>();
 
+    public static bool IsPlayerDead = false;
+
     void Start()
     {
+        IsPlayerDead = false; 
         currentHealth = maxHealth;
         UpdateHealthBar();
 
@@ -76,6 +79,7 @@ public class PlayerHealth : MonoBehaviour
         }
         damageCoroutines.Clear();
 
+        IsPlayerDead = true;
         playerDeathPanel.SetActive(true); 
         Time.timeScale = 0; 
         return; 

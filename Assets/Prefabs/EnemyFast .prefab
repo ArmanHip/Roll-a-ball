@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 225302341905571431}
   - component: {fileID: 16832206845455864}
   - component: {fileID: 1257838614225629394}
+  - component: {fileID: 685156253457796213}
   m_Layer: 9
   m_Name: 'EnemyFast '
   m_TagString: Enemy
@@ -149,3 +150,16 @@ MonoBehaviour:
   moveSpeed: 7
   rotationSpeed: 5
   smoothTime: 1
+--- !u!114 &685156253457796213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4294277924381206294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc9bacc44d30ea498417b11cc2b5780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
