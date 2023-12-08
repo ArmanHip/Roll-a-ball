@@ -37,7 +37,14 @@ public class WaveInfo : MonoBehaviour
         }
         else
         {
-            timeInfoText.text = "Next wave will start soon!";
+            if (enemySpawner.CurrentWaveIndex == enemySpawner.Waves.Count - 1 && GameObject.FindGameObjectsWithTag("Enemy").Length > 0) // Check if final wave and enemies are in scene
+            {
+                timeInfoText.text = "Kill all remaining enemies to win";
+            }
+            else
+            {
+                timeInfoText.text = "Next wave will start soon!";
+            }
         }
     }
 
