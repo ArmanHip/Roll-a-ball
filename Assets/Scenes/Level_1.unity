@@ -1417,7 +1417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &59365804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1747,7 +1747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &107492080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1861,7 +1861,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -860.85474, y: 397.60687}
+  m_AnchoredPosition: {x: -860.85474, y: 327.37494}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &107785118
@@ -9053,7 +9053,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'V - 1.3
+  m_text: 'V - 1.4
 
 '
   m_isRightToLeft: 0
@@ -9917,32 +9917,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveName: Wave 1
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
-      type: 3}
     spawnInterval: 5
     maxEnemies: 10
-  - waveName: Wave 2
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
+  - waveName: Wave 2
     spawnInterval: 4.5
     maxEnemies: 15
-  - waveName: Wave 3
-    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
-      type: 3}
-    spawnInterval: 3
-    maxEnemies: 4
-  - waveName: Wave 4
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
-    spawnInterval: 2
-    maxEnemies: 25
-  - waveName: Wave 5
+  - waveName: Wave 3
+    spawnInterval: 3
+    maxEnemies: 4
     enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
+  - waveName: Wave 4
+    spawnInterval: 2
+    maxEnemies: 25
+    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+      type: 3}
+  - waveName: Wave 5
     spawnInterval: 2
     maxEnemies: 6
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
+      type: 3}
   startDelay: 5
   cooldownDuration: 10
+  enemiesSpawned: 0
 --- !u!4 &415618671
 Transform:
   m_ObjectHideFlags: 0
@@ -9990,32 +9991,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveName: Wave 1
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
-      type: 3}
     spawnInterval: 5
     maxEnemies: 10
-  - waveName: Wave 2
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
+  - waveName: Wave 2
     spawnInterval: 4.5
     maxEnemies: 15
-  - waveName: Wave 3
-    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
-      type: 3}
-    spawnInterval: 3
-    maxEnemies: 4
-  - waveName: Wave 4
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
-    spawnInterval: 2
-    maxEnemies: 25
-  - waveName: Wave 5
+  - waveName: Wave 3
+    spawnInterval: 3
+    maxEnemies: 4
     enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
+  - waveName: Wave 4
+    spawnInterval: 2
+    maxEnemies: 25
+    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+      type: 3}
+  - waveName: Wave 5
     spawnInterval: 2
     maxEnemies: 6
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
+      type: 3}
   startDelay: 5
   cooldownDuration: 10
+  enemiesSpawned: 0
 --- !u!4 &424913057
 Transform:
   m_ObjectHideFlags: 0
@@ -10687,6 +10689,140 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &547650404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 547650407}
+  - component: {fileID: 547650406}
+  - component: {fileID: 547650405}
+  m_Layer: 5
+  m_Name: WaveTime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &547650405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547650404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Wave Time
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &547650406
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547650404}
+  m_CullTransparentMesh: 1
+--- !u!224 &547650407
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547650404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1404848562}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 20, y: -117.87506}
+  m_SizeDelta: {x: 600, y: 50}
+  m_Pivot: {x: 0, y: 1}
 --- !u!43 &573078873
 Mesh:
   m_ObjectHideFlags: 0
@@ -26417,6 +26553,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271748447}
   m_CullTransparentMesh: 1
+--- !u!1 &1271763605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1271763607}
+  - component: {fileID: 1271763606}
+  m_Layer: 0
+  m_Name: WaveInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1271763606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271763605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a12c2d363a24e4782679ff0319a79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawner: {fileID: 1898154076}
+  waveInfoText: {fileID: 1845348610}
+  timeInfoText: {fileID: 547650405}
+--- !u!4 &1271763607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271763605}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1281315880
 GameObject:
   m_ObjectHideFlags: 0
@@ -32465,6 +32648,7 @@ RectTransform:
   - {fileID: 107492082}
   - {fileID: 244510779}
   - {fileID: 1845348609}
+  - {fileID: 547650407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -43796,7 +43980,7 @@ GameObject:
   - component: {fileID: 1845348611}
   - component: {fileID: 1845348610}
   m_Layer: 5
-  m_Name: SurviveText
+  m_Name: CurrentWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43819,7 +44003,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -50}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1845348610
 MonoBehaviour:
@@ -43841,7 +44025,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Survive for -
+  m_text: Current Wave
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -44435,32 +44619,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveName: Wave 1
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
-      type: 3}
     spawnInterval: 5
     maxEnemies: 10
-  - waveName: Wave 2
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
+  - waveName: Wave 2
     spawnInterval: 4.5
     maxEnemies: 15
-  - waveName: Wave 3
-    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
-      type: 3}
-    spawnInterval: 3
-    maxEnemies: 4
-  - waveName: Wave 4
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
-    spawnInterval: 2
-    maxEnemies: 25
-  - waveName: Wave 5
+  - waveName: Wave 3
+    spawnInterval: 3
+    maxEnemies: 4
     enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
+  - waveName: Wave 4
+    spawnInterval: 2
+    maxEnemies: 25
+    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+      type: 3}
+  - waveName: Wave 5
     spawnInterval: 2
     maxEnemies: 6
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
+      type: 3}
   startDelay: 5
   cooldownDuration: 10
+  enemiesSpawned: 0
 --- !u!4 &1898154077
 Transform:
   m_ObjectHideFlags: 0
@@ -46832,32 +47017,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveName: Wave 1
-    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
-      type: 3}
     spawnInterval: 5
     maxEnemies: 10
-  - waveName: Wave 2
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
+  - waveName: Wave 2
     spawnInterval: 4.5
     maxEnemies: 15
-  - waveName: Wave 3
-    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
-      type: 3}
-    spawnInterval: 3
-    maxEnemies: 4
-  - waveName: Wave 4
     enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
       type: 3}
-    spawnInterval: 2
-    maxEnemies: 25
-  - waveName: Wave 5
+  - waveName: Wave 3
+    spawnInterval: 3
+    maxEnemies: 4
     enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
       type: 3}
+  - waveName: Wave 4
+    spawnInterval: 2
+    maxEnemies: 25
+    enemyPrefab: {fileID: 7485190655167022349, guid: 20da1afd8873d90449af892a103bd697,
+      type: 3}
+  - waveName: Wave 5
     spawnInterval: 2
     maxEnemies: 6
+    enemyPrefab: {fileID: 4294277924381206294, guid: cf68257cfe8edbb47a3a031b4fa73ea4,
+      type: 3}
   startDelay: 5
   cooldownDuration: 10
+  enemiesSpawned: 0
 --- !u!4 &2112611114
 Transform:
   m_ObjectHideFlags: 0
@@ -47066,3 +47252,4 @@ SceneRoots:
   - {fileID: 1686982929}
   - {fileID: 1640032679}
   - {fileID: 43561531}
+  - {fileID: 1271763607}

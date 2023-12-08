@@ -2,25 +2,35 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemySpawner : MonoBehaviour // Add interface for wave list and config
+public class EnemySpawner : MonoBehaviour
 {
-    [System.Serializable]
+    [System.Serializable] // Wave settings ect
     public class Wave
     {
-        public string waveName; 
-        public GameObject enemyPrefab; 
-        public float spawnInterval; 
-        public int maxEnemies; 
+        public string waveName;
+        public float spawnInterval;
+        public int maxEnemies;
+
+        public GameObject enemyPrefab;
     }
 
-    public List<Wave> waves; 
-    public float startDelay = 1f; 
-    public float cooldownDuration = 5f; 
+    public List<Wave> waves;
+    public float startDelay = 1f;
+    public float cooldownDuration = 5f;
 
     private int currentWaveIndex = 0;
-    private int enemiesSpawned = 0;
+
+    public int enemiesSpawned = 0; // has to be public for wave info stuff
     private float nextSpawnTime;
     private bool isSpawning = false;
+
+    public int CurrentWaveIndex { get { return currentWaveIndex; } } // Used for wave info stuff
+    public float NextSpawnTime { get { return nextSpawnTime; } }
+    public bool IsSpawning { get { return isSpawning; } }
+    public float CooldownDuration { get { return cooldownDuration; } }
+    public float WaveStartTime { get; private set; }
+
+    public List<Wave> Waves { get { return waves; } }
 
     void Start() // Wait for the wave to start
     {
@@ -37,6 +47,7 @@ public class EnemySpawner : MonoBehaviour // Add interface for wave list and con
     {
         if (currentWaveIndex < waves.Count)
         {
+            WaveStartTime = Time.time;
             Wave currentWave = waves[currentWaveIndex];
             enemiesSpawned = 0;
             isSpawning = true;
@@ -46,7 +57,7 @@ public class EnemySpawner : MonoBehaviour // Add interface for wave list and con
         else
         {
             Debug.Log("All waves completed!");
-            isSpawning = false; 
+            isSpawning = false;
         }
     }
 
@@ -64,7 +75,7 @@ public class EnemySpawner : MonoBehaviour // Add interface for wave list and con
 
                 if (enemiesSpawned >= currentWave.maxEnemies)
                 {
-                    StartCoroutine(Cooldown()); // If all enemies have spawned 
+                    StartCoroutine(Cooldown()); // If all enemies have spawned
                 }
             }
         }
@@ -73,9 +84,9 @@ public class EnemySpawner : MonoBehaviour // Add interface for wave list and con
     IEnumerator Cooldown() // Basic wave cooldown before next wave
     {
         isSpawning = false;
-        if (currentWaveIndex < waves.Count - 1) 
+        if (currentWaveIndex < waves.Count - 1)
         {
-            yield return new WaitForSeconds(cooldownDuration); 
+            yield return new WaitForSeconds(cooldownDuration);
             currentWaveIndex++;
             StartWave();
         }
@@ -84,5 +95,15 @@ public class EnemySpawner : MonoBehaviour // Add interface for wave list and con
     void SpawnEnemy(GameObject enemyPrefab)
     {
         Instantiate(enemyPrefab, transform.position, transform.rotation);
+    }
+
+    public float CalculateFullWaveTime() // Simple way to get the full wave time, used for displaying the wave time
+    {
+        if (currentWaveIndex < waves.Count)
+        {
+            Wave currentWave = waves[currentWaveIndex];
+            return currentWave.maxEnemies * currentWave.spawnInterval;
+        }
+        return 0f;
     }
 }
