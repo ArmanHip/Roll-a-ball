@@ -9,12 +9,15 @@ public class WaveInfo : MonoBehaviour
     public TextMeshProUGUI waveInfoText;
     public TextMeshProUGUI timeInfoText;
 
+    public GameObject winPanel; // Reference to the win panel
+
     void Update() // Update text with wave info
     {
         if (enemySpawner != null && waveInfoText != null && timeInfoText != null)
         {
             UpdateWaveInfoText();
             UpdateTimeInfoText();
+            CheckEnd();
         }
     }
 
@@ -35,6 +38,14 @@ public class WaveInfo : MonoBehaviour
         else
         {
             timeInfoText.text = "Next wave will start soon!";
+        }
+    }
+
+    private void CheckEnd()
+    {
+        if (enemySpawner.CurrentWaveIndex == enemySpawner.Waves.Count - 1 && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) // check if final wave and no enemies left in the scene
+        {
+            winPanel.SetActive(true); // Activate the win panel
         }
     }
 }
