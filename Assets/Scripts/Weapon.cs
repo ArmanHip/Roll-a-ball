@@ -8,12 +8,13 @@ public class Weapon : MonoBehaviour
     public float range = 100f;
     public Camera fpsCam;
     public GameObject muzzleFlash;
-
     public Transform gunBarrel;
     public TrailRenderer bulletTrail;
 
+    public GameObject shootSoundPrefab;
+
     private bool isShooting;
-    public float fireRate = 0.25f; 
+    public float fireRate = 0.25f;
     private float fireTime = 0f;
 
     void Update()
@@ -36,6 +37,13 @@ public class Weapon : MonoBehaviour
         muzzleFlash.SetActive(true);
         Invoke(nameof(DisableMuzzleFlash), 0.1f);
 
+        var shootSound = Instantiate(shootSoundPrefab, transform.position, Quaternion.identity); // Use prefab for shoot sound so it can overlap each other
+        var audioSource = shootSound.GetComponent<AudioSource>();
+        audioSource.pitch = Random.Range(0.9f, 1.1f); // Random pitch so it's more dynamic idk
+        audioSource.Play();
+
+        Destroy(shootSound, audioSource.clip.length); // Destroy to save memory
+
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
@@ -51,6 +59,6 @@ public class Weapon : MonoBehaviour
 
     void DisableMuzzleFlash()
     {
-        muzzleFlash.SetActive(false); 
+        muzzleFlash.SetActive(false);
     }
 }

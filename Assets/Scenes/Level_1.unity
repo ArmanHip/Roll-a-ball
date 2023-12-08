@@ -23379,6 +23379,8 @@ MonoBehaviour:
   gunBarrel: {fileID: 1285554352}
   bulletTrail: {fileID: 6670010285891972953, guid: 6d0a597581bc77a4a9af0f4ff4e134ab,
     type: 3}
+  shootSoundPrefab: {fileID: 772584725949357805, guid: a5b3e3e61835f074b842bae39ecf5ad9,
+    type: 3}
   fireRate: 0.2
 --- !u!1 &1041502670
 GameObject:
@@ -25202,7 +25204,7 @@ PrefabInstance:
     - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36,
         type: 3}
       propertyPath: lockCursor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4459864850019384740, guid: 6bacecc4f3df9584198879c73a6b6c36,
         type: 3}
