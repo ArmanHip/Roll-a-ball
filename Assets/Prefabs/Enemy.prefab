@@ -167,3 +167,4 @@ MonoBehaviour:
     type: 3}
   soundPlayerPrefab: {fileID: 7471919900620907581, guid: 6ac5365e4c3649c4db5008ec8bbd2a02,
     type: 3}
+  player: {fileID: 0}

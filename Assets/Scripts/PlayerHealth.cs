@@ -8,15 +8,15 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public Image healthBar;
-    public float damageInterval = 1f; 
-    public GameObject playerDeathPanel; 
+    public float damageInterval = 1f;
+    public GameObject playerDeathPanel;
     private Dictionary<string, Coroutine> damageCoroutines = new Dictionary<string, Coroutine>();
 
     public static bool IsPlayerDead = false;
 
     void Start()
     {
-        IsPlayerDead = false; 
+        IsPlayerDead = false;
         currentHealth = maxHealth;
         UpdateHealthBar();
 
@@ -49,8 +49,8 @@ public class PlayerHealth : MonoBehaviour
     {
         while (true)
         {
-            TakeDamage(damage); 
-            yield return new WaitForSeconds(damageInterval); 
+            TakeDamage(damage);
+            yield return new WaitForSeconds(damageInterval);
         }
     }
 
@@ -80,10 +80,10 @@ public class PlayerHealth : MonoBehaviour
         damageCoroutines.Clear();
 
         IsPlayerDead = true;
-        playerDeathPanel.SetActive(true); 
-        Time.timeScale = 0; 
-        return; 
+        playerDeathPanel.SetActive(true);
+        Time.timeScale = 0;
+        return;
 
-        //Debug.Log("Player has died."); 
+        //Debug.Log("Player has died.");
     }
 }
